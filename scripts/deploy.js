@@ -7,7 +7,7 @@ async function main() {
   await nftMarketplace.deployed();
   console.log("nftMarketplace deployed to:", nftMarketplace.address);
 
-  fs.writeFileSync('./config.js', `
+  fs.writeFileSync('./config.ts', `
   export const marketplaceAddress = "${nftMarketplace.address}"
   `)
 }

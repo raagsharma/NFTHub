@@ -8,7 +8,8 @@ import {
   marketplaceAddress
 } from '../config'
 
-import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
+import NFTMarketplaceArtifact from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
+import { NFTMarketplace  } from '../typechain-types'
 
 export default function Home() {
   const [nfts, setNfts] = useState([])
@@ -19,7 +20,7 @@ export default function Home() {
   async function loadNFTs() {
     /* create a generic provider and query for unsold market items */
     const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545/")
-    const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, provider)
+    const contract = new ethers.Contract(marketplaceAddress, NFTMarketplaceArtifact.abi, provider) as NFTMarketplace;
     const data = await contract.fetchMarketItems()
 
     /*
@@ -44,13 +45,13 @@ export default function Home() {
     setNfts(items)
     setLoadingState('loaded')
   }
-  async function buyNft(nft) {
+  async function buyNft(nft: NFTMarketplace.MarketItemStruct) {
     /* needs the user to sign the transaction, so will use Web3Provider and sign it */
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
-    const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
+    const contract = new ethers.Contract(marketplaceAddress, NFTMarketplaceArtifact.abi, signer) as NFTMarketplace;
 
     /* user will be prompted to pay the asking proces to complete the transaction */
     const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')

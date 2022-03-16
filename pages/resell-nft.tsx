@@ -14,7 +14,7 @@ import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketp
 export default function ResellNFT() {
   const [formInput, updateFormInput] = useState({ price: '', image: '' })
   const router = useRouter()
-  const { id, tokenURI } = router.query
+  const { id, tokenURI } = router.query as { id: string, tokenURI: string }
   const { image, price } = formInput
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function ResellNFT() {
         />
         {
           image && (
-            <Image className="rounded mt-4" width="350" src={image} alt="" width="100%" height="100%" layout="responsive" objectFit="contain" />
+            <Image className="rounded mt-4" width="350" src={image} alt="" height="100%" layout="responsive" objectFit="contain" />
           )
         }
         <button onClick={listNFTForSale} className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg">
