@@ -14,6 +14,8 @@ RUN yarn install
 FROM node:16-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+RUN npm install concurrently -g
+RUN npm run preserve
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
