@@ -40,6 +40,8 @@ RUN adduser --system --uid 1001 nextjs
 # You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/scripts/deploy.js ./scripts/deploy.js
+COPY --from=builder /app/artifacts ./scripts/artifacts
+COPY --from=builder /app/contracts ./scripts/contracts
 COPY --from=builder /app/hardhat.config.ts ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
