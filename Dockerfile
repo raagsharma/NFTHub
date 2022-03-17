@@ -29,6 +29,7 @@ RUN yarn build
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
 WORKDIR /app
+RUN npm install concurrently -g
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
@@ -40,8 +41,8 @@ RUN adduser --system --uid 1001 nextjs
 # You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/scripts/deploy.js ./scripts/deploy.js
-COPY --from=builder /app/artifacts ./scripts/artifacts
-COPY --from=builder /app/contracts ./scripts/contracts
+COPY --from=builder /app/artifacts ./artifacts
+COPY --from=builder /app/contracts ./contracts
 COPY --from=builder /app/hardhat.config.ts ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
