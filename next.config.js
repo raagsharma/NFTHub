@@ -3,4 +3,7 @@ module.exports = {
   images: {
     domains: ['ipfs.infura.io'],
   },
+  experimental: {
+    outputStandalone: true,
+  },
 }

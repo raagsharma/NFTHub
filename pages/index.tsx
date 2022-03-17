@@ -91,7 +91,7 @@ export default function Home() {
   if (loadingState === "loaded" && !nfts.length)
     return (
       <Stack mt={20} spacing={2} justifyContent="center" alignItems="center">
-        <Image src="/void.svg" height={300} width={300} />
+        <Image src="/void.svg" height={300} width={300} alt="void" />
         <Typography>
           There are no NFTs in the marketplace, please create new NFT{" "}
           <Link color="secondary" variant="body1" href="/create-nft">

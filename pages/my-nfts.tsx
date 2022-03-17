@@ -65,13 +65,8 @@ export default function MyAssets() {
   if (loadingState === "loaded" && !nfts.length)
     return (
       <Stack mt={20} spacing={2} justifyContent="center" alignItems="center">
-        <Image src="/void.svg" height={300} width={300} />
-        <Typography>
-          You didn't have any NFTs{" "}
-          <Link color="secondary" variant="body1" href="/create-nft">
-            here.
-          </Link>
-        </Typography>
+        <Image src="/void.svg" height={300} width={300} alt="void" />
+        <Typography>You didn&apos;t have any NFTs</Typography>
       </Stack>
     );
   return (
