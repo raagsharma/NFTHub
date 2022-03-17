@@ -28,9 +28,10 @@ RUN yarn build
 
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
+RUN apk add --no-cache git libc6-compat
 WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 RUN npm install concurrently -g
-RUN npm install hardhat -g
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
@@ -50,12 +51,12 @@ COPY --from=builder /app/package.json ./package.json
 
 # Automatically leverage output traces to reduce image size 
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
 
 EXPOSE 3000
+
+EXPOSE 8545
 
 ENV PORT 3000
 
