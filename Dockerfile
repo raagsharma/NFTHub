@@ -15,8 +15,8 @@ FROM node:16-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 RUN npm install concurrently -g
-RUN npm run preserve
 COPY . .
+RUN concurrently --kill-others "npm run hardhat" "npm run deploy"; exit 0
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
@@ -49,7 +49,7 @@ COPY --from=builder /app/artifacts ./artifacts
 COPY --from=builder /app/contracts ./contracts
 COPY --from=builder /app/hardhat.config.ts ./
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
+
 
 # Automatically leverage output traces to reduce image size 
 # https://nextjs.org/docs/advanced-features/output-file-tracing
