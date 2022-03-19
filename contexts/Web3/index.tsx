@@ -40,7 +40,7 @@ export const Web3Provider = ({ children }) => {
 
   useEffect(() => {
     connectWallet();
-  }, [state.data.provider]);
+  }, []);
 
   return (
     <Web3Context.Provider value={{ state, dispatch }}>
