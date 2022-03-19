@@ -26,7 +26,7 @@ export default function Home() {
     setLoadingState("loading");
     /* create a generic provider and query for unsold market items */
     const provider = new ethers.providers.JsonRpcProvider(
-      "http://localhost:8545/"
+      "https://rpc.nfthub.kira.yt/"
     );
     const contract = new ethers.Contract(
       marketplaceAddress,
