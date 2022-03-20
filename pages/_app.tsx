@@ -12,14 +12,14 @@ import Container from "@mui/material/Container";
 import { Web3Provider } from "../contexts/Web3";
 
 function MyApp({ Component, pageProps }) {
-  // const darkTheme = createTheme({
-  //   palette: {
-  //     mode: "dark",
-  //   },
-  // });
+  const darkTheme = createTheme({
+    palette: {
+      mode: "light",
+    },
+  });
 
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Web3Provider>
         <ResponsiveAppBar />
