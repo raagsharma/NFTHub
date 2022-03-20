@@ -29,8 +29,8 @@ export default function ImgMediaCard({
   onClick,
 }: ImgMediaCard) {
   return (
-    <Card sx={{ maxWidth: 210 }}>
-      <CardMedia component="img" alt={name} height="140" image={image} />
+    <Card sx={{ maxWidth: 350 }}>
+      <CardMedia component="img" alt={name} height="300" image={image} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {name}
