@@ -31,7 +31,7 @@ export default function ImgMediaCard({
   return (
     <Card sx={{ maxWidth: 350 }}>
       <CardMedia component="img" alt={name} height="300" image={image} />
-      <CardContent height="120">
+      <CardContent sx={{ height: "120px" }}>
         <Typography gutterBottom variant="h5" component="div">
           {name}
         </Typography>
